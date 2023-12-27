@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        .profile-img {
+            max-width: 12%;
+            height: auto;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                flex-direction: row;
+            }
+            .card img {
+                width: 25%;
+            }
+            .card-content {
+                padding: 20px;
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="assets/foto_royraflesmatorangpasaribu.jpg" alt="Foto Profil" class="profile-img">
+        <h1>Roy Rafles Matorang Pasaribu</h1>
+        <p>Bandar Lampung, Indonesia, 35131 | royraflmp@gmail.com | +(62)82282419941 |
+            linkedin.com/in/roy-rafles-matorang-pasaribu | github.com/royraflesmatorangpasaribu
+            </p>
+    </header>
+
+    <section>
+        <h2>Tentang Saya</h2>
+        <p>Saya adalah Mahasiswa Ilmu Komputer dari Universitas Lampung. Pendekatan saya dicirikan oleh rasa ingin tahu, fokus, ketelitian, komunikasi yang efektif, dan ketangkasan. Saya
+            fokus pada bidang minat dan kemahiran utama saya meliputi backend programming dan mobile development.</p>
+    </section>
+
+    <section>
+        <h2>Portofolio</h2>
+        <div class="card">
+            <img src="assets/1.png" alt="Proyek 1">
+            <div class="card-content">
+                <h3>Proyek 1</h3>
+                <p>Aplikasi Mobile OJUN (Ojek Unila)</p>
+                <a href="https://github.com/royraflesmatorangpasaribu/Ojek-Unila" class="button">Lihat Proyek</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <img src="assets/2.png" alt="Proyek 2">
+            <div class="card-content">
+                <h3>Proyek 2</h3>
+                <p>Prototype Aplikasi Mobile GoHealth (Asisten Kesehatan Pribadi)</p>
+                <a href="https://www.figma.com/file/hvch9oJzfHH1hkxL4FAHnV/Go-Health_Friday_Kelas-A?type=design&node-id=0-1&mode=design&t=UOTlgOxXcnGEv5Ez-0" class="button">Lihat Proyek</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skill</h2>
+        <p>Kerja sama tim, Komunikasi, bertanggung jawab, dapat diandalkan, fokus, teliti, Kreatif, C++, C, Python, Java,
+           SQL, PHP, Codeigniter4, Laravel, Pemahaman Data, Microsoft Power, Machine Learning,
+           Internet of Things, MySQL, PostgreSQL, Android Studio, Dart, Flutter, Postman, API (Application
+           Antarmuka Pemrograman).</p>
+    </section>
+
+    <section>
+        <h2>Hubungi Saya</h2>
+        <p>Anda dapat menghubungi saya melalui email di royraflmp@gmail.com atau melalui formulir kontak di bawah ini.</p>
+        <!-- Tambahkan formulir kontak atau tautan email di sini -->
+        <a href="https://wa.me/6282282419941" class="button">Hubungi Saya</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Roy Rafles Matorang Pasaribu</p>
+    </footer>
+
+</body>
+</html>
