@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <title>Portofolio Roy Rafles Matorang Pasaribu</title>
     <style>
         body {
@@ -11,29 +12,54 @@
             padding: 20px;
             text-align: justify;
         }
+        .navbar {
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            padding: 15px 20px;
+            color: rgb(16, 15, 15);
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar span {
+            font-weight: bold;
+        }
         header {
             text-align: center;
-            margin-bottom: 30px;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            color: rgb(0, 0, 0);
+            border-radius: 0 0 20px 20px;
         }
         section {
             margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333; /* Warna dan ketebalan garis */
         }
-        h2 {
+        
+        h1.h2 {
             border-bottom: 2px solid #333;
             padding-bottom: 5px;
         }
         .profile-img {
-            max-width: 250px;
+            width: 250px;  /* Lebih baik gunakan width dan height yang sama */
             height: 250px;
             border-radius: 50%;
+            display: block; /* Agar tidak ada spasi ekstra jika dalam elemen inline */
             margin: 0 auto;
             object-fit: cover; 
-            object-position: 2 -8px;
+            object-position: center; /* Memastikan fokus gambar berada di tengah */
+            border: 4px solid #fff; /* Opsional: Tambahkan border putih agar lebih estetik */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opsional: Efek bayangan agar lebih menarik */
         }
-
-       
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
         .card {
-            border: 1px solid #ddd;
+            border: 1px solid #2377b3;
             border-radius: 5px;
             overflow: hidden;
             margin-bottom: 20px;
@@ -73,13 +99,45 @@
                 flex: 1;
             }
         }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: rgb(5, 5, 5);
+            margin-top: 30px;
+        }
     </style>
+    <script>
+        function updateNavbar() {
+            let now = new Date();
+            let hours = now.getHours();
+            let greeting;
+            if (hours < 12) {
+                greeting = "Good Morning";
+            } else if (hours < 18) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+            let timeString = now.toLocaleTimeString();
+            document.getElementById("navbar-greeting").innerText = greeting;
+            document.getElementById("navbar-time").innerText = timeString;
+        }
+        setInterval(updateNavbar, 1000);
+        window.onload = updateNavbar;
+    </script>
 </head>
 <body>
+    <div class="navbar">
+        <span id="navbar-greeting">Hello</span>
+        <span id="navbar-time"></span>
+    </div>
 
     <header>
-        <img src="assets/foto_royraflesmatorangpasaribu.jpg" alt="Foto Profil" class="profile-img">
+        <img src="assets/Roy.jpg" alt="Foto Profil" class="profile-img">
         <h1>Roy Rafles Matorang Pasaribu</h1>
+        <p>Computer Science | Backend Developer | System Engineer</p>
         <p>Bandar Lampung, Indonesia, 35131 | royraflmp@gmail.com | +(62)82282419941 |
             <a href="https://www.linkedin.com/in/roy-rafles-matorang-pasaribu" target="_blank">linkedin.com/in/roy-rafles-matorang-pasaribu</a> |
             <a href="https://github.com/royraflesmatorangpasaribu" target="_blank">github.com/royraflesmatorangpasaribu</a>
@@ -133,8 +191,17 @@
             <img src="assets/5.jpg" alt="Proyek 5">
             <div class="card-content">
                 <h3>Project 5</h3>
-                <p>Dashboard Sparepart Warehouse</p>
+                <p>Dashboard Sparepart Warehouse at Tunas Honda</p>
                 <a href="https://bit.ly/DashboardOperationalGudangSparepart" class="button" target="_blank">View</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="assets/6.png" alt="Proyek 6">
+            <div class="card-content">
+                <h3>Project 6</h3>
+                <p>Extension Deteksi Hate Speech On TikTok Web</p>
+                <a href="https://github.com/royraflesmatorangpasaribu/extensions-deteksi-hate-speech-tiktok" class="button" target="_blank">View</a>
             </div>
         </div>
     </section>
@@ -166,7 +233,7 @@
             <li>Engineering a learning environment that allows students to easily grasp complex operating system concepts, encouraging a valuable experiential learning journey.</li>
         </ul>
 
-        <h3>Assistant Lecturer for Operating System</h3>
+        <h3>Assistant Lecturer for Programming Basics</h3>
         <p>August 2022 - December 2022</p>
         <ul>
             <li>Manage learning sessions and provide effective clarification of learning material, making teaching more understandable for students.</li>
@@ -198,7 +265,7 @@
         <h3>Computer Science</h3>
         <p>2021 - 2025</p>
         <p>University of Lampung</p>
-        <p>GPA: 3.95</p>
+        <p>GPA: 3.96</p>
     </section>
 
     <section>
@@ -215,7 +282,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Roy Rafles Matorang Pasaribu</p>
+        <p>&copy; 2025 Roy Rafles Matorang Pasaribu</p>
     </footer>
 
 </body>
