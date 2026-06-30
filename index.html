@@ -936,6 +936,9 @@
             transition: all 0.3s ease;
             margin-top: 20px;
             position: relative;
+            align-self: flex-start;
+            width: fit-content;
+            max-width: 100%;
         }
 
         .vinyl-player:hover {
@@ -1001,45 +1004,53 @@
             pointer-events: none;
         }
 
+        .vinyl-disc-wrap {
+            position: relative;
+            width: 66px;
+            height: 66px;
+            flex-shrink: 0;
+        }
+
         .vinyl-tonearm {
             position: absolute;
-            top: -6px;
-            right: -2px;
-            width: 40px;
-            height: 40px;
-            transform-origin: 85% 15%;
-            transform: rotate(-35deg);
-            transition: transform 0.5s ease;
+            top: 4px;
+            right: 2px;
+            width: 50px;
+            height: 50px;
+            transform-origin: 100% 0%;
+            transform: rotate(50deg);
+            transition: transform 0.6s ease;
             pointer-events: none;
-            z-index: 2;
+            z-index: 3;
         }
 
         .vinyl-disc.playing + .vinyl-tonearm,
         .vinyl-player.playing .vinyl-tonearm {
-            transform: rotate(-8deg);
+            transform: rotate(0deg);
         }
 
         .vinyl-tonearm .arm {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 32px;
+            top: 3px;
+            right: 3px;
+            width: 26px;
             height: 4px;
             background: linear-gradient(90deg, #94a3b8, #cbd5e1);
             border-radius: 4px;
-            transform: rotate(45deg);
+            transform: rotate(-35deg);
             transform-origin: right center;
         }
 
         .vinyl-tonearm .pivot {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 12px;
-            height: 12px;
+            top: -3px;
+            right: -3px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
-            background: #cbd5e1;
-            border: 2px solid #64748b;
+            background: radial-gradient(circle at 35% 35%, #e2e8f0, #94a3b8);
+            border: 2px solid #475569;
+            z-index: 2;
         }
 
         .vinyl-info {
@@ -1578,13 +1589,15 @@
 
                 <!-- Vinyl Record Music Player -->
                 <div class="vinyl-player" id="vinylPlayer">
-                    <div class="vinyl-disc" id="vinylDisc">
-                        <div class="shine"></div>
-                        <div class="label"></div>
-                    </div>
-                    <div class="vinyl-tonearm">
-                        <div class="arm"></div>
-                        <div class="pivot"></div>
+                    <div class="vinyl-disc-wrap">
+                        <div class="vinyl-disc" id="vinylDisc">
+                            <div class="shine"></div>
+                            <div class="label"></div>
+                        </div>
+                        <div class="vinyl-tonearm">
+                            <div class="arm"></div>
+                            <div class="pivot"></div>
+                        </div>
                     </div>
                     <div class="vinyl-info">
                         <span class="vinyl-title">Now Spinning</span>
@@ -1601,7 +1614,7 @@
     </section>
 
     <!-- Hidden YouTube audio source -->
-    <div id="ytAudio" style="position:absolute;width:0;height:0;overflow:hidden;left:-9999px;"></div>
+    <div id="ytAudio" style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;"></div>
 
     <!-- Footer -->
     <footer>
@@ -1741,15 +1754,29 @@
 
             window.onYouTubeIframeAPIReady = function() {
                 ytPlayer = new YT.Player('ytAudio', {
+                    width: '1',
+                    height: '1',
                     videoId: VIDEO_ID,
-                    playerVars: { autoplay: 0, controls: 0, playsinline: 1 },
+                    playerVars: { autoplay: 0, controls: 0, playsinline: 1, rel: 0 },
                     events: {
                         onReady: () => {
                             isReady = true;
                             if (pendingPlay) { startPlay(); pendingPlay = false; }
                         },
                         onStateChange: (e) => {
-                            if (e.data === YT.PlayerState.ENDED) {
+                            if (e.data === YT.PlayerState.PLAYING) {
+                                isPlaying = true;
+                                disc.classList.add('playing');
+                                player.classList.add('playing');
+                                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                                status.innerHTML = 'Playing ' + eqHtml;
+                            } else if (e.data === YT.PlayerState.PAUSED) {
+                                isPlaying = false;
+                                disc.classList.remove('playing');
+                                player.classList.remove('playing');
+                                btn.innerHTML = '<i class="fas fa-play"></i>';
+                                status.textContent = 'Paused';
+                            } else if (e.data === YT.PlayerState.ENDED) {
                                 ytPlayer.seekTo(0);
                                 ytPlayer.playVideo();
                             }
@@ -1759,6 +1786,8 @@
             };
 
             function startPlay() {
+                ytPlayer.setVolume(100);
+                ytPlayer.unMute();
                 ytPlayer.playVideo();
                 isPlaying = true;
                 disc.classList.add('playing');
