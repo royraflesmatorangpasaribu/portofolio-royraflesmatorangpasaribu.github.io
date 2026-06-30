@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgMis" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b3b2e"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="barMis" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#6ee7b7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgMis)"/>
+  <circle cx="120" cy="90" r="150" fill="#ffffff" opacity="0.04"/>
+  <circle cx="720" cy="450" r="130" fill="#ffffff" opacity="0.04"/>
+
+  <text x="50" y="70" fill="#6ee7b7" font-size="20" font-weight="700" letter-spacing="2">BANK LAMPUNG</text>
+  <text x="50" y="120" fill="#ffffff" font-size="44" font-weight="800">MIS Foresto</text>
+  <text x="50" y="152" fill="#d1fae5" font-size="20">Management Information System</text>
+  <rect x="50" y="170" width="90" height="4" rx="2" fill="#34d399"/>
+
+  <!-- Dashboard mockup -->
+  <rect x="50" y="210" width="430" height="240" rx="14" fill="#ffffff" opacity="0.95"/>
+  <rect x="50" y="210" width="430" height="40" rx="14" fill="#0f766e"/>
+  <rect x="50" y="236" width="430" height="14" fill="#0f766e"/>
+  <circle cx="74" cy="230" r="6" fill="#fca5a5"/>
+  <circle cx="94" cy="230" r="6" fill="#fde047"/>
+  <circle cx="114" cy="230" r="6" fill="#86efac"/>
+  <text x="140" y="235" fill="#d1fae5" font-size="14" font-weight="600">Reporting Dashboard</text>
+
+  <!-- KPI cards -->
+  <rect x="68" y="266" width="120" height="56" rx="8" fill="#ecfdf5"/>
+  <text x="80" y="290" fill="#0f766e" font-size="13">Operasional</text>
+  <text x="80" y="312" fill="#065f46" font-size="20" font-weight="800">98.4%</text>
+  <rect x="200" y="266" width="120" height="56" rx="8" fill="#ecfdf5"/>
+  <text x="212" y="290" fill="#0f766e" font-size="13">Keuangan</text>
+  <text x="212" y="312" fill="#065f46" font-size="20" font-weight="800">Rp 4.2T</text>
+  <rect x="332" y="266" width="130" height="56" rx="8" fill="#ecfdf5"/>
+  <text x="344" y="290" fill="#0f766e" font-size="13">Performa</text>
+  <text x="344" y="312" fill="#065f46" font-size="20" font-weight="800">+12.6%</text>
+
+  <!-- Bar chart -->
+  <g>
+    <rect x="78" y="410" width="26" height="20" rx="3" fill="url(#barMis)"/>
+    <rect x="118" y="392" width="26" height="38" rx="3" fill="url(#barMis)"/>
+    <rect x="158" y="372" width="26" height="58" rx="3" fill="url(#barMis)"/>
+    <rect x="198" y="400" width="26" height="30" rx="3" fill="url(#barMis)"/>
+    <rect x="238" y="360" width="26" height="70" rx="3" fill="url(#barMis)"/>
+    <rect x="278" y="384" width="26" height="46" rx="3" fill="url(#barMis)"/>
+  </g>
+  <!-- Donut -->
+  <g transform="translate(400,395)">
+    <circle r="34" fill="none" stroke="#d1fae5" stroke-width="14"/>
+    <circle r="34" fill="none" stroke="#0f766e" stroke-width="14" stroke-dasharray="150 64" transform="rotate(-90)"/>
+  </g>
+
+  <!-- Tableau tag -->
+  <g>
+    <rect x="520" y="225" width="230" height="160" rx="14" fill="#ffffff" opacity="0.08"/>
+    <text x="540" y="260" fill="#a7f3d0" font-size="18" font-weight="700">Integrasi Tableau</text>
+    <text x="540" y="292" fill="#d1fae5" font-size="14">• Data Visualization</text>
+    <text x="540" y="318" fill="#d1fae5" font-size="14">• Operational Reporting</text>
+    <text x="540" y="344" fill="#d1fae5" font-size="14">• Financial Modules</text>
+    <text x="540" y="370" fill="#d1fae5" font-size="14">• Performance Metrics</text>
+  </g>
+</svg>

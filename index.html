@@ -3,287 +3,1787 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <title>Portofolio Roy Rafles Matorang Pasaribu</title>
+    <title>Roy Rafles Matorang Pasaribu | Back End Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            text-align: justify;
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --gradient-1: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --gradient-2: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --success: #10b981;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Navigation */
         .navbar {
-            background: linear-gradient(135deg, #ffffff, #ffffff);
-            padding: 15px 20px;
-            color: rgb(16, 15, 15);
-            text-align: center;
-            font-size: 18px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
-        .navbar span {
-            font-weight: bold;
+
+        .navbar .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        header {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #ffffff, #ffffff);
-            color: rgb(0, 0, 0);
-            border-radius: 0 0 20px 20px;
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
         }
-        section {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #333; /* Warna dan ketebalan garis */
+
+        .navbar .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
         }
-        
-        h1.h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
+
+        .navbar .nav-links a:hover {
+            color: var(--accent-light);
         }
-        .profile-img {
-            width: 250px;  /* Lebih baik gunakan width dan height yang sama */
-            height: 250px;
-            border-radius: 50%;
-            display: block; /* Agar tidak ada spasi ekstra jika dalam elemen inline */
-            margin: 0 auto;
-            object-fit: cover; 
-            object-position: center; /* Memastikan fokus gambar berada di tengah */
-            border: 4px solid #fff; /* Opsional: Tambahkan border putih agar lebih estetik */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opsional: Efek bayangan agar lebih menarik */
+
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
+
+        .navbar .nav-links a:hover::after {
+            width: 100%;
         }
-        .card {
-            border: 1px solid #2377b3;
-            border-radius: 5px;
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            position: relative;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, var(--accent-glow) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(1deg); }
+            66% { transform: translate(-20px, 20px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text .greeting {
+            font-family: var(--font-mono);
+            color: var(--accent-light);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 0.2s;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 0.4s;
+        }
+
+        .hero-text h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .role {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 0.6s;
+            min-height: 1.6em;
+        }
+
+        .typed-text {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .type-cursor {
+            display: inline-block;
+            color: var(--accent-light);
+            font-weight: 400;
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-text .description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 0.8s;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 1s;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+            position: relative;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards 0.6s;
+            perspective: 1000px;
+        }
+
+        .hero-image .img-wrapper {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out;
+            animation: floatImg 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImg {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-image img {
+            width: 320px;
+            height: 320px;
+            border-radius: 24px;
+            object-fit: cover;
+            border: 3px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
+                        0 0 50px rgba(59, 130, 246, 0.2);
+            transform: translateZ(40px);
+            display: block;
+        }
+
+        .hero-image .glow-ring {
+            position: absolute;
+            inset: -20px;
+            border-radius: 32px;
+            background: var(--gradient-1);
+            filter: blur(40px);
+            opacity: 0.35;
+            z-index: -1;
+            transform: translateZ(-20px);
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--accent);
+            border-radius: 16px;
+            opacity: 0.6;
+            transform: translateZ(80px);
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: -15px;
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(139, 92, 246, 0.6);
+            border-radius: 16px;
+            opacity: 0.6;
+            transform: translateZ(60px);
+        }
+
+        .hero-image .float-badge {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: translateZ(100px);
+        }
+
+        .hero-image .badge-api {
+            top: 30px;
+            left: -60px;
+            color: var(--accent-light);
+        }
+
+        .hero-image .badge-db {
+            bottom: 50px;
+            right: -55px;
+            color: var(--success);
+        }
+
+        .hero-image .float-badge i {
+            font-size: 1rem;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .skill-category .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: var(--font-mono);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-item .date {
+            font-family: var(--font-mono);
+            color: var(--accent-light);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .timeline-item .company {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-item ul li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .timeline-item ul li::before {
+            content: '▹';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-card .project-info {
+            padding: 25px;
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-card .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-card .project-links a {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .project-card .project-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Education Section */
+        .education-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .education-card .edu-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .education-card .edu-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .education-card .edu-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .education-card .edu-info .gpa {
+            margin-top: 8px;
+            color: var(--success);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
-        .card img {
-            width: 100%;
-            height: auto;
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
-        .card-content {
-            padding: 20px;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .button:hover {
-            background-color: #2980b9;
+            color: var(--text);
         }
 
-        @media (min-width: 768px) {
-            .card {
-                flex-direction: row;
-            }
-            .card img {
-                width: 25%;
-            }
-            .card-content {
-                padding: 20px;
-                flex: 1;
-            }
+        .contact-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
         }
 
+        .contact-item .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-light);
+            font-size: 1.1rem;
+        }
+
+        .contact-item .contact-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item .contact-text strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .contact-socials {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        /* Footer */
         footer {
             text-align: center;
+            padding: 30px 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer .footer-terminal {
+            font-family: var(--font-mono);
+            color: var(--accent-light);
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text .description {
+                margin: 0 auto 30px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image img {
+                width: 220px;
+                height: 220px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .education-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations for scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Code-like decorations */
+        .code-block {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 20px;
-            background-color: #ffffff;
-            color: rgb(5, 5, 5);
-            margin-top: 30px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            overflow-x: auto;
+        }
+
+        .code-block .keyword { color: #c084fc; }
+        .code-block .string { color: #34d399; }
+        .code-block .comment { color: #64748b; }
+        .code-block .function { color: #60a5fa; }
+
+        /* Vinyl Record Player */
+        .vinyl-player {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 60px;
+            padding: 12px 22px 12px 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .vinyl-player:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .vinyl-disc {
+            position: relative;
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            background: repeating-radial-gradient(
+                circle at center,
+                #0a0a0a 0px, #0a0a0a 2px,
+                #1a1a1a 2px, #1a1a1a 4px
+            );
+            border: 2px solid #000;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), inset 0 0 8px rgba(255,255,255,0.06);
+            flex-shrink: 0;
+            cursor: pointer;
+            animation: spin 4s linear infinite;
+            animation-play-state: paused;
+            transition: transform 0.2s ease;
+        }
+
+        .vinyl-disc.playing {
+            animation-play-state: running;
+        }
+
+        .vinyl-disc:active {
+            transform: scale(0.95);
+        }
+
+        .vinyl-disc .label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 3px #000;
+        }
+
+        .vinyl-disc .label::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #0a0a0a;
+        }
+
+        .vinyl-disc .shine {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        .vinyl-tonearm {
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            width: 40px;
+            height: 40px;
+            transform-origin: 85% 15%;
+            transform: rotate(-35deg);
+            transition: transform 0.5s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .vinyl-disc.playing + .vinyl-tonearm,
+        .vinyl-player.playing .vinyl-tonearm {
+            transform: rotate(-8deg);
+        }
+
+        .vinyl-tonearm .arm {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 32px;
+            height: 4px;
+            background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+            border-radius: 4px;
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+
+        .vinyl-tonearm .pivot {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: 2px solid #64748b;
+        }
+
+        .vinyl-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .vinyl-info .vinyl-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .vinyl-info .vinyl-status {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vinyl-info .vinyl-status .eq {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 10px;
+        }
+
+        .vinyl-info .vinyl-status .eq span {
+            width: 2px;
+            background: var(--accent-light);
+            height: 3px;
+        }
+
+        .vinyl-player.playing .eq span {
+            animation: equalize 0.9s ease-in-out infinite;
+        }
+
+        .vinyl-player.playing .eq span:nth-child(2) { animation-delay: 0.2s; }
+        .vinyl-player.playing .eq span:nth-child(3) { animation-delay: 0.4s; }
+        .vinyl-player.playing .eq span:nth-child(4) { animation-delay: 0.1s; }
+
+        @keyframes equalize {
+            0%, 100% { height: 3px; }
+            50% { height: 10px; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .vinyl-play-btn {
+            background: var(--gradient-1);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .vinyl-play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .vinyl-player {
+                padding: 10px 16px 10px 10px;
+            }
+            .vinyl-disc {
+                width: 54px;
+                height: 54px;
+            }
         }
     </style>
-    <script>
-        function updateNavbar() {
-            let now = new Date();
-            let hours = now.getHours();
-            let greeting;
-            if (hours < 12) {
-                greeting = "Good Morning";
-            } else if (hours < 18) {
-                greeting = "Good Afternoon";
-            } else {
-                greeting = "Good Evening";
-            }
-            let timeString = now.toLocaleTimeString();
-            document.getElementById("navbar-greeting").innerText = greeting;
-            document.getElementById("navbar-time").innerText = timeString;
-        }
-        setInterval(updateNavbar, 1000);
-        window.onload = updateNavbar;
-    </script>
 </head>
 <body>
-    <div class="navbar">
-        <span id="navbar-greeting">Hello</span>
-        <span id="navbar-time"></span>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">&lt;Roy /&gt;</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
 
-    <header>
-        <img src="assets/Roy.jpg" alt="Foto Profil" class="profile-img">
-        <h1>Roy Rafles Matorang Pasaribu</h1>
-        <p>Computer Science | Backend Developer | System Engineer</p>
-        <p>Bandar Lampung, Indonesia, 35131 | royraflmp@gmail.com | +(62)82282419941 |
-            <a href="https://www.linkedin.com/in/roy-rafles-matorang-pasaribu" target="_blank">linkedin.com/in/roy-rafles-matorang-pasaribu</a> |
-            <a href="https://github.com/royraflesmatorangpasaribu" target="_blank">github.com/royraflesmatorangpasaribu</a>
-        </p>
-    </header>
-
-    <section>
-        <h2>SUMMARY</h2>
-        <p>An undergraduate Computer Science from Lampung University, Bandar Lampung, with a passion for continuous learning and skill development. Eager to contribute my expertise to challenging projects, I seek opportunities to apply my knowledge and gain valuable experience in the field. My approach is characterized by curiosity, focus, thoroughness, effective communication, and agility. My primary areas of interest and proficiency include back end developer, System engineer and full stack developer.</p>
-    </section>
-
-    <section>
-        <h2>PROJECT</h2>
-        <div class="card">
-            <img src="assets/1.png" alt="Proyek 1">
-            <div class="card-content">
-                <h3>Project 1</h3>
-                <p>Aplikasi Mobile OJUN (Ojek Unila)</p>
-                <a href="https://github.com/royraflesmatorangpasaribu/Ojek-Unila" class="button" target="_blank">View</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="greeting">// Hello World, I'm</p>
+                <h1>Roy Rafles<br><span>Matorang Pasaribu</span></h1>
+                <p class="role"><span id="typedRole" class="typed-text"></span><span class="type-cursor">|</span></p>
+                <p class="description">Building secure, scalable, and high-performance backend systems. Specialized in API development, database design, and robust server-side architecture.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
             </div>
-        </div>
-        
-        <div class="card">
-            <img src="assets/2.png" alt="Proyek 2">
-            <div class="card-content">
-                <h3>Project 2</h3>
-                <p>Prototype Aplikasi Mobile GoHealth (Asisten Kesehatan Pribadi)</p>
-                <a href="https://www.figma.com/file/hvch9oJzfHH1hkxL4FAHnV/Go-Health_Friday_Kelas-A?type=design&node-id=0-1&mode=design&t=UOTlgOxXcnGEv5Ez-0" class="button" target="_blank">View</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="assets/3.jpg" alt="Proyek 3">
-            <div class="card-content">
-                <h3>Project 3</h3>
-                <p>E-Learning System</p>
-                <a href="https://github.com/royraflesmatorangpasaribu/Projek-Akhir-Web-Lanjut-Kelompok-3" class="button" target="_blank">View</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="assets/4.jpg" alt="Proyek 4">
-            <div class="card-content">
-                <h3>Project 4</h3>
-                <p>E-Voting System By Lembaga Riset Cipta IlmuIndonesia</p>
-                <a href="https://bit.ly/EvotingLembagaRisetCiptaIlmuIndonesia" class="button" target="_blank">View</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="assets/5.jpg" alt="Proyek 5">
-            <div class="card-content">
-                <h3>Project 5</h3>
-                <p>Dashboard Sparepart Warehouse at Tunas Honda</p>
-                <a href="https://bit.ly/DashboardOperationalGudangSparepart" class="button" target="_blank">View</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="assets/6.png" alt="Proyek 6">
-            <div class="card-content">
-                <h3>Project 6</h3>
-                <p>Extension Deteksi Hate Speech On TikTok Web</p>
-                <a href="https://github.com/royraflesmatorangpasaribu/extensions-deteksi-hate-speech-tiktok" class="button" target="_blank">View</a>
+            <div class="hero-image" id="heroImage">
+                <div class="img-wrapper" id="imgWrapper">
+                    <div class="glow-ring"></div>
+                    <img src="assets/Roy.jpg" alt="Roy Rafles Matorang Pasaribu">
+                    <div class="float-badge badge-api"><i class="fas fa-code"></i> REST API</div>
+                    <div class="float-badge badge-db"><i class="fas fa-database"></i> Database</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section>
-        <h2>EXPERIENCE</h2>
-        <h3>System Developer Intern at Tunas Honda</h3>
-        <p>February 2024 - July 2024</p>
-        <ul>
-            <li>Understood and applied basic concepts and principles of accurate and timely documentation in a work environment.</li>
-            <li>Designed, implemented, and tested software solutions based on Object-Oriented Programming (OOP) and Development Life Cycle (DLC) concepts.</li>
-            <li>Developed new modules or features within applications using Clean Code principles and performed code refactoring to enhance code clarity and cleanliness.</li>
-            <li>Analyzed and developed real-world APIs based on case studies from the company or open-source projects, including API structure, endpoints, required parameters, and generated responses.</li>
-        </ul>
-
-        <h3>Assistant Lecturer for Object Oriented Programming</h3>
-        <p>August 2023 - December 2023</p>
-        <ul>
-            <li>Created and presented over 15 lectures on object-oriented programming, ensuring students comprehended intricate concepts; received outstanding student evaluations, averaging 4.8/5 for clarity and understanding.</li>
-            <li>Organized hands-on practice sessions for 15 sessions, strengthening practical concepts and providing experience in understanding object-oriented programming concepts easily.</li>
-            <li>Demonstrated proficiency in using java language programming and Integrated Development Environment tools such as NetBeans.</li>
-        </ul>
-
-        <h3>Assistant Lecturer for Operating System</h3>
-        <p>February 2023 - June 2023</p>
-        <ul>
-            <li>Orchestrated the preparation and execution of 15+ engaging lectures on operating systems, utilizing multimedia resources, case studies, and hands-on activities to foster student understanding; resulted in a 25% increase in student participation and improved overall course retention rates.</li>
-            <li>Ensured clarity and accessibility in the presentation of intricate topics, fostering an environment conducive to effective learning.</li>
-            <li>Engineering a learning environment that allows students to easily grasp complex operating system concepts, encouraging a valuable experiential learning journey.</li>
-        </ul>
-
-        <h3>Assistant Lecturer for Programming Basics</h3>
-        <p>August 2022 - December 2022</p>
-        <ul>
-            <li>Manage learning sessions and provide effective clarification of learning material, making teaching more understandable for students.</li>
-            <li>Build collaborative relationships with primary faculty and fellow teaching assistants, creating an efficient and supportive learning environment.</li>
-            <li>Assist in the preparation and delivery of course material, ensuring that complex programming concepts are presented clearly and can be understood by students.</li>
-        </ul>
-
-        <h3>Olimpiade Sains Nasional (Olimpiade Sains Akbar Nasional)</h3>
-        <p>August 2022</p>
-        <ul>
-            <li>In mathematics at the college level.</li>
-            <li>Declared as an active participant.</li>
-            <li>Recipient of the bronze medal.</li>
-        </ul>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <h2>About <span>Me</span></h2>
+            <p>Back End Developer specializing in banking & financial systems at Bank Lampung</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm a Computer Science graduate from University of Lampung with a strong passion for building robust back-end systems. Currently working as a Programmer at Bank Lampung, where I develop and maintain core banking systems including MIS, e-Form APIs, notification services (Notiflow), and digital banking solutions.</p>
+                <p>My expertise lies in building secure APIs for financial transactions, managing enterprise reporting systems with Tableau integration, and ensuring system reliability for critical banking operations. I also teach programming part-time at Timedoor Academy.</p>
+                <div class="code-block">
+                    <span class="keyword">const</span> <span class="function">developer</span> = {<br>
+                    &nbsp;&nbsp;name: <span class="string">"Roy Rafles Matorang Pasaribu"</span>,<br>
+                    &nbsp;&nbsp;role: <span class="string">"Backend Developer"</span>,<br>
+                    &nbsp;&nbsp;motto: <span class="string">"Clean code, secure banking systems"</span><br>
+                    };
+                </div>
+            </div>
+            <div class="about-stats">
+                <div class="stat-card">
+                    <div class="number">3.96</div>
+                    <div class="label">GPA Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">12+</div>
+                    <div class="label">Projects Built</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">2+</div>
+                    <div class="label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">10+</div>
+                    <div class="label">Tech Stack</div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>ORGANIZATION</h2>
-        <h3>Himpunan Mahasiswa Ilmu Komputer (HIMAKOM)</h3>
-        <p>February 2022 - December 2022</p>
-        <ul>
-            <li>Member of a Badan Khusus at Himakom.</li>
-            <li>Carrying out Open Recruitment for Lecturer Assistants, carrying out selection stages (online or offline interviews), preparing practicum or response schedules, create/update SOP, create material-specific modules (C++, web, design), divide groups, look for presenters.</li>
-        </ul>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="section-header">
+            <h2>Tech <span>Stack</span></h2>
+            <p>Technologies and tools I work with daily</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-server"></i></div>
+                <h3>Back End Development</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">Laravel</span>
+                    <span class="skill-tag">CodeIgniter4</span>
+                    <span class="skill-tag">Odoo</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-database"></i></div>
+                <h3>Database & Data</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Data Modeling</span>
+                    <span class="skill-tag">Query Optimization</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-plug"></i></div>
+                <h3>API & Integration</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">REST API</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">API Design</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>DevOps & Systems</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Secure Coding</span>
+                    <span class="skill-tag">OOP</span>
+                    <span class="skill-tag">Clean Architecture</span>
+                    <span class="skill-tag">SDLC</span>
+                    <span class="skill-tag">IoT</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile & Frontend</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Flutter</span>
+                    <span class="skill-tag">Android Studio</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">C</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="icon"><i class="fas fa-brain"></i></div>
+                <h3>Other Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Microsoft Power BI</span>
+                    <span class="skill-tag">Teamwork</span>
+                    <span class="skill-tag">Communication</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>EDUCATION</h2>
-        <h3>Computer Science</h3>
-        <p>2021 - 2025</p>
-        <p>University of Lampung</p>
-        <p>GPA: 3.96</p>
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="section-header">
+            <h2>Work <span>Experience</span></h2>
+            <p>My professional journey in tech</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="date">September 2025 - Present</div>
+                <h3>Backend Developer</h3>
+                <div class="company">Bank Lampung</div>
+                <ul>
+                    <li>Manage, develop, and monitor the company's Management Information System (MIS) covering various operational, financial, and performance reporting modules, including integration with Tableau for data visualization and reporting purposes</li>
+                    <li>Manage and maintain the Electronic Regulation System (ERS) to support regulatory documentation and compliance processes</li>
+                    <li>Develop and manage Notiflow services using Java to support integration of automated notification systems, including email and Telegram notifications for the Warning Notification System (WNS)</li>
+                    <li>Develop and maintain e-Form systems for booking code generation, new bank account opening, and mobile banking registration processes to improve digital banking services and customer onboarding efficiency</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">November 2025 - Present</div>
+                <h3>Part-Time Programming Teacher</h3>
+                <div class="company">Timedoor Academy</div>
+                <ul>
+                    <li>Deliver programming lessons to students, covering fundamental to intermediate coding concepts through structured and interactive sessions</li>
+                    <li>Guide students in hands-on projects and practical exercises to strengthen problem-solving and logical thinking skills</li>
+                    <li>Monitor student progress and provide constructive feedback to support continuous improvement</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">January 2024 - February 2024</div>
+                <h3>Database Developer</h3>
+                <div class="company">Village Administration of Gebang, Padang Cermin District, Pesawaran Regency</div>
+                <ul>
+                    <li>Developed a population database for Gebang Village recording a total of 6,604 people (3,409 males and 3,195 females) across 1,896 households</li>
+                    <li>Designed the system to support village administration processes and improve efficiency in managing demographic data</li>
+                    <li>Streamlined local administrative tasks through structured and reliable data management</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">February 2024 - July 2024</div>
+                <h3>System Developer Intern</h3>
+                <div class="company">Tunas Honda</div>
+                <ul>
+                    <li>Designed, implemented, and tested software solutions based on OOP and SDLC principles</li>
+                    <li>Developed new modules using Clean Code practices and performed code refactoring</li>
+                    <li>Analyzed and developed real-world APIs including structure, endpoints, and parameters</li>
+                    <li>Applied documentation standards in a professional work environment</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">August 2023 - December 2023</div>
+                <h3>Assistant Lecturer — Object Oriented Programming</h3>
+                <div class="company">University of Lampung</div>
+                <ul>
+                    <li>Created and delivered 15+ lectures on OOP concepts with 4.8/5 average evaluation</li>
+                    <li>Organized hands-on practice sessions strengthening Java programming skills</li>
+                    <li>Demonstrated proficiency in Java and NetBeans IDE</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">February 2023 - June 2023</div>
+                <h3>Assistant Lecturer — Operating Systems</h3>
+                <div class="company">University of Lampung</div>
+                <ul>
+                    <li>Orchestrated 15+ engaging lectures resulting in 25% increase in student participation</li>
+                    <li>Utilized multimedia resources, case studies, and hands-on activities</li>
+                    <li>Fostered an environment conducive to effective learning of complex OS concepts</li>
+                </ul>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="date">August 2022 - December 2022</div>
+                <h3>Assistant Lecturer — Programming Basics</h3>
+                <div class="company">University of Lampung</div>
+                <ul>
+                    <li>Managed learning sessions with effective clarification of programming materials</li>
+                    <li>Built collaborative relationships with faculty and fellow teaching assistants</li>
+                    <li>Assisted in preparation and delivery of course material for beginner programmers</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>SKILL</h2>
-        <p>Teamwork, communication, responsible, reliable, focus, thorough, creative, C++, C, Python, Java, SQL, PHP, Codeigniter4, Laravel, Odoo, Django, Git, data understanding, Microsoft Power, machine learning, Internet of Things, MySQL, PostgreSQL, Android Studio, Flutter, Postman, API (Application Programming Interface).
-        </p>
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="section-header">
+            <h2>Featured <span>Projects</span></h2>
+            <p>Showcasing my work in software development — Banking & Beyond</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <img src="assets/eform-api.svg" alt="e-Form Banking API">
+                <div class="project-info">
+                    <h3>🏦 API e-Form — Core Banking Services</h3>
+                    <p>RESTful API for digital banking forms including: pembukaan rekening, setor & tarik tunai, RTGS, kliring, transfer, deposito, registrasi mobile banking, registrasi kartu debit, and inquiry param get code booking e-Form.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-lock"></i> Internal Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/mis-foresto.svg" alt="MIS Foresto">
+                <div class="project-info">
+                    <h3>📊 MIS Foresto — Management Information System</h3>
+                    <p>Enterprise MIS platform for Bank Lampung covering operational, financial, and performance reporting modules with Tableau integration for data visualization.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-lock"></i> Internal Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/wns.svg" alt="WNS">
+                <div class="project-info">
+                    <h3>🔔 WNS — Warning Notification System</h3>
+                    <p>Automated notification service (Notiflow) built with Java for audit and compliance reporting needs, delivering alerts via email and Telegram.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-lock"></i> Internal Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/ers.svg" alt="ERS">
+                <div class="project-info">
+                    <h3>📋 ERS — Electronic Regulation System</h3>
+                    <p>Digital regulation management system to support regulatory documentation, compliance processes, and internal policy tracking at Bank Lampung.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-lock"></i> Internal Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/banklampung-web.svg" alt="Bank Lampung Website">
+                <div class="project-info">
+                    <h3>🌐 Bank Lampung Company Website</h3>
+                    <p>Development and maintenance of the official Bank Lampung company website including features like penambahan suku bunga, undian Sipemda, and L-Save Bank Lampung.</p>
+                    <div class="project-links">
+                        <a href="https://banklampung.co.id" target="_blank"><i class="fas fa-external-link-alt"></i> Visit Website</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/gebang-db.svg" alt="Gebang Village Population Database">
+                <div class="project-info">
+                    <h3>🗂️ Population Database — Gebang Village</h3>
+                    <p>Population database for Gebang Village, Pesawaran Regency, recording 6,604 people (3,409 males, 3,195 females) across 1,896 households to support village administration and demographic data management.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-database"></i> Village Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/alur-skripsi.svg" alt="Alur Skripsi Ilkom Unila">
+                <div class="project-info">
+                    <h3>🎓 Alur Skripsi Ilkom Unila</h3>
+                    <p>Web-based guide that visualizes the thesis (skripsi) workflow for Computer Science students at University of Lampung — from proposal to final defense.</p>
+                    <div class="project-links">
+                        <a href="https://royraflesmatorangpasaribu.github.io/alur-skripsi-ilkom-unila/" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/1.png" alt="Ojek Unila Mobile App">
+                <div class="project-info">
+                    <h3>🚗 OJUN — Ojek Unila</h3>
+                    <p>Mobile application for campus transportation service built with modern mobile development practices.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/royraflesmatorangpasaribu/Ojek-Unila" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/3.jpg" alt="E-Learning System">
+                <div class="project-info">
+                    <h3>📚 E-Learning System</h3>
+                    <p>Full-stack web-based learning management system with course management and student tracking features.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/royraflesmatorangpasaribu/Projek-Akhir-Web-Lanjut-Kelompok-3" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/4.jpg" alt="E-Voting System">
+                <div class="project-info">
+                    <h3>🗳️ E-Voting System</h3>
+                    <p>Secure electronic voting platform developed for Lembaga Riset Cipta Ilmu Indonesia.</p>
+                    <div class="project-links">
+                        <a href="https://bit.ly/EvotingLembagaRisetCiptaIlmuIndonesia" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/5.jpg" alt="Dashboard Sparepart">
+                <div class="project-info">
+                    <h3>📈 Warehouse Dashboard</h3>
+                    <p>Operational dashboard for sparepart warehouse management at Tunas Honda dealership.</p>
+                    <div class="project-links">
+                        <a href="https://bit.ly/DashboardOperationalGudangSparepart" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <img src="assets/6.png" alt="Hate Speech Detection">
+                <div class="project-info">
+                    <h3>🛡️ Hate Speech Detection Extension</h3>
+                    <p>Browser extension for detecting hate speech on TikTok Web using machine learning algorithms.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/royraflesmatorangpasaribu/extensions-deteksi-hate-speech-tiktok" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>CONTACT ME</h2>
-        <p>You can reach me via email at royraflmp@gmail.com or via the contact form below.</p>
-        <!-- Tambahkan formulir kontak atau tautan email di sini -->
-        <a href="https://wa.me/6282282419941" class="button">CONTACT</a>
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="section-header">
+            <h2>My <span>Education</span></h2>
+            <p>Academic background and achievements</p>
+        </div>
+        <div class="education-card fade-in">
+            <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="edu-info">
+                <h3>Bachelor of Computer Science</h3>
+                <p>University of Lampung • 2021 - 2025</p>
+                <p>Focused on software engineering, system architecture, and back-end development</p>
+                <div class="gpa">GPA: 3.96 / 4.00</div>
+            </div>
+        </div>
+        <div style="margin-top: 30px;">
+            <div class="timeline-item fade-in" style="margin-left: 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px;">
+                <div class="date">July 2025</div>
+                <h3>🏅 Piagam Penghargaan — Predikat Kelulusan Pujian (Cum Laude)</h3>
+                <div class="company">University of Lampung • Awarded by the Rector for graduating with honors (GPA 3.96, completed in 3.66 years)</div>
+            </div>
+            <div class="timeline-item fade-in" style="margin-left: 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;">
+                <div class="date">August 2022</div>
+                <h3>🥉 Bronze Medal — Olimpiade Sains Nasional</h3>
+                <div class="company">National Science Olympiad (Mathematics - College Level)</div>
+            </div>
+        </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-header">
+            <h2>Get In <span>Touch</span></h2>
+            <p>Let's connect and build something great together</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <p>I'm always open to discussing new opportunities, tech collaborations, or interesting projects in the banking and fintech space.</p>
+                <a href="mailto:royraflmp@gmail.com" class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        royraflmp@gmail.com
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/roy-rafles-matorang-pasaribu" class="contact-item" target="_blank">
+                    <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="contact-text">
+                        <strong>LinkedIn</strong>
+                        roy-rafles-matorang-pasaribu
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/royrafmp/?hl=id" class="contact-item" target="_blank">
+                    <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="contact-text">
+                        <strong>Instagram</strong>
+                        @royrafmp
+                    </div>
+                </a>
+            </div>
+            <div class="contact-socials">
+                <div class="code-block">
+                    <span class="comment">// Let's collaborate</span><br>
+                    <span class="keyword">async function</span> <span class="function">connectWith</span>(developer) {<br>
+                    &nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">"/api/connect"</span>, {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;method: <span class="string">"POST"</span>,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;body: { message: <span class="string">"Hi Roy!"</span> }<br>
+                    &nbsp;&nbsp;});<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> response.status; <span class="comment">// 200 OK ✓</span><br>
+                    }
+                </div>
+                <div class="social-links" style="margin-top: 20px;">
+                    <a href="https://github.com/royraflesmatorangpasaribu" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/roy-rafles-matorang-pasaribu" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/royrafmp/?hl=id" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:royraflmp@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+
+                <!-- Vinyl Record Music Player -->
+                <div class="vinyl-player" id="vinylPlayer">
+                    <div class="vinyl-disc" id="vinylDisc">
+                        <div class="shine"></div>
+                        <div class="label"></div>
+                    </div>
+                    <div class="vinyl-tonearm">
+                        <div class="arm"></div>
+                        <div class="pivot"></div>
+                    </div>
+                    <div class="vinyl-info">
+                        <span class="vinyl-title">Now Spinning</span>
+                        <span class="vinyl-status" id="vinylStatus">
+                            Tap to play
+                        </span>
+                    </div>
+                    <button class="vinyl-play-btn" id="vinylBtn" aria-label="Play music">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden YouTube audio source -->
+    <div id="ytAudio" style="position:absolute;width:0;height:0;overflow:hidden;left:-9999px;"></div>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Roy Rafles Matorang Pasaribu</p>
+        <div class="footer-terminal">$ echo "Thanks for visiting!" && exit 0</div>
+        <p>&copy; 2025 Roy Rafles Matorang Pasaribu. Built with passion and clean code.</p>
     </footer>
 
+    <!-- Scripts -->
+    <script>
+        // Typewriter effect for role
+        (function() {
+            const roles = [
+                'Backend Developer',
+                'Programmer',
+                'API Developer',
+                'System Engineer',
+                'Problem Solver'
+            ];
+            const el = document.getElementById('typedRole');
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                if (!el) return;
+                const current = roles[roleIndex];
+                if (isDeleting) {
+                    el.textContent = current.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    el.textContent = current.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let delay = isDeleting ? 50 : 110;
+
+                if (!isDeleting && charIndex === current.length) {
+                    delay = 1800; // pause at full word
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    delay = 400; // pause before next word
+                }
+
+                setTimeout(type, delay);
+            }
+            setTimeout(type, 1200);
+        })();
+
+        // 3D tilt effect on profile photo
+        const heroImage = document.getElementById('heroImage');
+        const imgWrapper = document.getElementById('imgWrapper');
+
+        if (heroImage && imgWrapper) {
+            heroImage.addEventListener('mousemove', (e) => {
+                const rect = heroImage.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateY = ((x - centerX) / centerX) * 12;
+                const rotateX = -((y - centerY) / centerY) * 12;
+                imgWrapper.style.animation = 'none';
+                imgWrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            heroImage.addEventListener('mouseleave', () => {
+                imgWrapper.style.transform = 'rotateX(0) rotateY(0)';
+                imgWrapper.style.animation = 'floatImg 6s ease-in-out infinite';
+            });
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '10px 40px';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                navbar.style.padding = '15px 40px';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Vinyl Record YouTube Music Player
+        (function() {
+            const VIDEO_ID = 'R5kI_REBBlI';
+            const disc = document.getElementById('vinylDisc');
+            const btn = document.getElementById('vinylBtn');
+            const player = document.getElementById('vinylPlayer');
+            const status = document.getElementById('vinylStatus');
+            let ytPlayer = null;
+            let isReady = false;
+            let isPlaying = false;
+            let pendingPlay = false;
+
+            // Load YouTube IFrame API
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
+
+            const eqHtml = '<span class="eq"><span></span><span></span><span></span><span></span></span>';
+
+            window.onYouTubeIframeAPIReady = function() {
+                ytPlayer = new YT.Player('ytAudio', {
+                    videoId: VIDEO_ID,
+                    playerVars: { autoplay: 0, controls: 0, playsinline: 1 },
+                    events: {
+                        onReady: () => {
+                            isReady = true;
+                            if (pendingPlay) { startPlay(); pendingPlay = false; }
+                        },
+                        onStateChange: (e) => {
+                            if (e.data === YT.PlayerState.ENDED) {
+                                ytPlayer.seekTo(0);
+                                ytPlayer.playVideo();
+                            }
+                        }
+                    }
+                });
+            };
+
+            function startPlay() {
+                ytPlayer.playVideo();
+                isPlaying = true;
+                disc.classList.add('playing');
+                player.classList.add('playing');
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                status.innerHTML = 'Playing ' + eqHtml;
+            }
+
+            function pausePlay() {
+                if (ytPlayer) ytPlayer.pauseVideo();
+                isPlaying = false;
+                disc.classList.remove('playing');
+                player.classList.remove('playing');
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+                status.textContent = 'Paused';
+            }
+
+            function toggle() {
+                if (!isReady) { pendingPlay = true; status.textContent = 'Loading...'; return; }
+                if (isPlaying) { pausePlay(); } else { startPlay(); }
+            }
+
+            btn.addEventListener('click', toggle);
+            disc.addEventListener('click', toggle);
+        })();
+    </script>
 </body>
 </html>

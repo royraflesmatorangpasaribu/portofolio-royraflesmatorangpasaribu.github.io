@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgEform" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f2a5e"/>
+      <stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="accentEform" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgEform)"/>
+  <circle cx="700" cy="80" r="160" fill="#ffffff" opacity="0.04"/>
+  <circle cx="100" cy="430" r="120" fill="#ffffff" opacity="0.04"/>
+
+  <!-- Bank Lampung label -->
+  <text x="50" y="70" fill="#93c5fd" font-size="20" font-weight="700" letter-spacing="2">BANK LAMPUNG</text>
+  <text x="50" y="120" fill="#ffffff" font-size="44" font-weight="800">API e-Form</text>
+  <text x="50" y="152" fill="#cbd5e1" font-size="20">Core Banking Services</text>
+  <rect x="50" y="170" width="90" height="4" rx="2" fill="url(#accentEform)"/>
+
+  <!-- Endpoint cards -->
+  <g font-family="monospace" font-size="15">
+    <rect x="50" y="210" width="330" height="44" rx="8" fill="#ffffff" opacity="0.08"/>
+    <rect x="62" y="222" width="50" height="20" rx="4" fill="#22c55e"/>
+    <text x="70" y="237" fill="#06281a" font-size="12" font-weight="700">POST</text>
+    <text x="124" y="237" fill="#e2e8f0">/rekening/pembukaan</text>
+
+    <rect x="50" y="264" width="330" height="44" rx="8" fill="#ffffff" opacity="0.08"/>
+    <rect x="62" y="276" width="50" height="20" rx="4" fill="#22c55e"/>
+    <text x="70" y="291" fill="#06281a" font-size="12" font-weight="700">POST</text>
+    <text x="124" y="291" fill="#e2e8f0">/transaksi/transfer</text>
+
+    <rect x="50" y="318" width="330" height="44" rx="8" fill="#ffffff" opacity="0.08"/>
+    <rect x="62" y="330" width="50" height="20" rx="4" fill="#3b82f6"/>
+    <text x="74" y="345" fill="#fff" font-size="12" font-weight="700">GET</text>
+    <text x="124" y="345" fill="#e2e8f0">/eform/booking-code</text>
+
+    <rect x="50" y="372" width="330" height="44" rx="8" fill="#ffffff" opacity="0.08"/>
+    <rect x="62" y="384" width="50" height="20" rx="4" fill="#22c55e"/>
+    <text x="70" y="399" fill="#06281a" font-size="12" font-weight="700">POST</text>
+    <text x="124" y="399" fill="#e2e8f0">/mbanking/register</text>
+  </g>
+
+  <!-- Feature chips -->
+  <g font-size="14" fill="#dbeafe">
+    <rect x="430" y="210" width="150" height="34" rx="17" fill="#ffffff" opacity="0.1"/>
+    <text x="448" y="232">RTGS &amp; Kliring</text>
+    <rect x="595" y="210" width="120" height="34" rx="17" fill="#ffffff" opacity="0.1"/>
+    <text x="613" y="232">Deposito</text>
+    <rect x="430" y="256" width="160" height="34" rx="17" fill="#ffffff" opacity="0.1"/>
+    <text x="448" y="278">Setor / Tarik Tunai</text>
+    <rect x="430" y="302" width="180" height="34" rx="17" fill="#ffffff" opacity="0.1"/>
+    <text x="448" y="324">Registrasi Kartu Debit</text>
+  </g>
+
+  <!-- Lock / secure icon -->
+  <g transform="translate(560,360)">
+    <rect x="0" y="22" width="90" height="70" rx="10" fill="url(#accentEform)"/>
+    <path d="M18 22 v-12 a27 27 0 0 1 54 0 v12" fill="none" stroke="#60a5fa" stroke-width="8"/>
+    <circle cx="45" cy="52" r="9" fill="#0f2a5e"/>
+    <rect x="41" y="56" width="8" height="20" rx="4" fill="#0f2a5e"/>
+  </g>
+</svg>
